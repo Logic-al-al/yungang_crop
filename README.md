@@ -1,23 +1,23 @@
 # yungang-crop
 
-Crop printed photo blocks from scanned book plate images.
+从扫描书籍图版中自动检测并裁剪印刷照片区域。
 
-This repository contains the cropping script and project documentation only. Raw scans and generated cropped images are intentionally kept out of Git because they are large data artifacts.
+本仓库只保存裁剪脚本、依赖清单和项目说明。原始扫描图、压缩包和生成后的裁剪结果都属于数据文件，体积较大，因此不会提交到 Git。
 
-## Layout
+## 目录结构
 
-Keep data in local-only folders:
+请把数据保存在本地目录中：
 
 ```text
-data/      # input scans, not committed
-output/    # generated cropped JPEGs, not committed
+data/      # 输入扫描图，不提交
+output/    # 生成的裁剪 JPEG，不提交
 ```
 
-By default, the script reads images from `data/` and writes cropped JPEG files to `output/`.
+脚本默认从 `data/` 读取图片，并将裁剪后的 JPEG 写入 `output/`。
 
-## Install
+## 安装
 
-Use Python 3.12 or a recent Python 3 release.
+建议使用 Python 3.12 或较新的 Python 3 版本。
 
 ```powershell
 python -m venv .venv
@@ -25,41 +25,41 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-## Usage
+## 使用方法
 
-Preview detections without writing output files:
+只预览检测结果，不写入输出文件：
 
 ```powershell
 python crop_data_images.py --dry-run
 ```
 
-Run the cropper and write JPEG crops under `output/`:
+执行裁剪，并将 JPEG 结果写入 `output/`：
 
 ```powershell
 python crop_data_images.py
 ```
 
-Run with explicit folders:
+指定输入和输出目录：
 
 ```powershell
 python crop_data_images.py --input data --output output
 ```
 
-Overwrite existing output files:
+允许覆盖已经存在的输出文件：
 
 ```powershell
 python crop_data_images.py --overwrite
 ```
 
-## Arguments
+## 参数说明
 
-- `--input`: input folder containing source images. Defaults to `data`.
-- `--output`: output folder for cropped JPEG files. Defaults to `output`.
-- `--dry-run`: detect and print crop boxes without writing files.
-- `--overwrite`: allow existing output files to be replaced.
-- `--max-dim`: maximum image dimension used during detection. Crops are still saved from original pixels. Defaults to `1800`.
-- `--safety-pixels`: outward crop expansion in pixels to avoid cutting printed-photo edges. Defaults to `4`.
+- `--input`：源图片所在目录，默认值为 `data`。
+- `--output`：裁剪结果输出目录，默认值为 `output`。
+- `--dry-run`：只检测并打印裁剪框，不写入文件。
+- `--overwrite`：允许覆盖已经存在的输出文件。
+- `--max-dim`：检测阶段使用的最大图像边长；最终裁剪仍会使用原始像素，默认值为 `1800`。
+- `--safety-pixels`：裁剪框向外扩展的安全像素数，用于避免切到印刷照片边缘，默认值为 `4`。
 
-## Data Policy
+## 数据管理
 
-The repository ignores `data/`, `output/`, Python caches, virtual environments, and local environment files. Keep source scans, zip archives, and generated images outside Git.
+`.gitignore` 已排除 `data/`、`output/`、Python 缓存、虚拟环境和本地环境变量文件。请将源扫描图、zip 压缩包和生成图像保留在本地，不要提交到 GitHub。
