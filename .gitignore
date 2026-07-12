@@ -1,0 +1,18 @@
+# Local data and generated results
+data/
+output/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments and local env files
+.venv/
+venv/
+.env
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
