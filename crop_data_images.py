@@ -317,7 +317,7 @@ def detect_photo_boxes(rgb: np.ndarray, max_dim: int, safety_pixels: int) -> lis
 
 
 def make_output_path(output_root: Path, relative_parent: Path, stem: str, index: int, count: int) -> Path:
-    suffix = "" if count == 1 else f"_{index}"
+    suffix = "" if count == 1 else chr(ord("a") + index - 1)
     return output_root / relative_parent / f"{stem}{suffix}.jpg"
 
 
